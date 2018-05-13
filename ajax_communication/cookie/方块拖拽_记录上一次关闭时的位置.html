@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #F44336;
+            position: absolute;
+            left: 1px;
+            top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script src="./tool_cookie.js"></script>
+    <script>
+        var boxOne = document.getElementsByTagName('div')[0];
+        var key = 1;
+        function recodeSetPos(dom){
+            var leftCookie = parseInt(cookieFun.getCookie('left'));
+            var topCookie = parseInt(cookieFun.getCookie('top'));
+            if(leftCookie&&topCookie&&key){
+                key--;
+                dom.style.left = leftCookie + 'px';
+                dom.style.top = topCookie + 'px';
+            }
+            cookieFun.setCookie('left',dom.offsetLeft,100000000)
+            cookieFun.setCookie('height',dom.offsetTop,100000000)
+        }
+        function moveBox() {
+             var move;
+             /*点击鼠标*/
+            boxOne.addEventListener('mousedown',function (ev) {
+                var event = ev || window.event;
+                var boxOneInfo = window.getComputedStyle(boxOne,null);
+                var mouseDistLeft = event.pageX-parseInt(boxOneInfo.left);
+                var mouseDisTop = event.pageY-parseInt(boxOneInfo.top);
+                /*移动事件函数*/
+                move = function (ev) {
+                    var event = ev || window.event;
+                    boxOne.style.left = event.pageX-mouseDistLeft + 'px';
+                    boxOne.style.top = event.pageY-mouseDisTop + 'px';
+                };
+                /*移动鼠标*/
+                document.addEventListener('mousemove',move,false);
+            },false);
+            /*释放书鼠标*/
+            document.addEventListener('mouseup',mouseUp,false);
+            function mouseUp(){
+                recodeSetPos(boxOne);
+                document.removeEventListener('mousemove',move,false);/* 当dom中没有绑定事件或已经解绑这个函数，那么触发解绑函数并不会执行 */
+                // boxOne.removeEventListener('mouseup',mouseUp,false);                
+            }
+        }
+        function init(){
+            recodeSetPos(boxOne);
+            moveBox();
+        }
+        init();
+    </script>
+</body>
+</html>

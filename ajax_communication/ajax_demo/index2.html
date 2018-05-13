@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<form action="">
+		name:<input type="text" id="formName" name="username"><br>
+		age:<input type="text" id="age" name="age"><br>
+		<input type="submit" class="submit">
+	</form>
+	<button>刷新新闻</button>
+	<ul></ul>
+	<script>
+		var btnNews = document.getElementsByTagName('button')[0];
+		var btnSubmit = document.getElementsByClassName('submit')[0];
+		var str = '';
+		function createNewAjax(method,url,data,callback) {
+			var xhr;
+			if (XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			} else {
+				xhr = new ActiveXObject('Microsoft.XMLHttp');
+			}
+			if(method === 'GET') {
+				xhr.open(method, url + '?' + data, true);
+				xhr.send();
+			} else if(method === 'POST') {
+				xhr.open(method,url,true);
+				xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+				xhr.send(data);
+			}
+			xhr.onreadystatechange = function (ev) {
+				if (xhr.readyState === 4){
+					if (xhr.status === 200){
+						// oRes = JSON.parse(xhr.responseText);
+						callback(xhr.responseText);
+					}
+				}
+			}
+		}
+		btnNews.onclick = function () {
+			createNewAjax('GET','./getNews.php','',createLi);
+		};
+		btnSubmit.onclick = function (e) {
+			event = e || window.event;
+			event.preventDefault();
+			var oData = formName.name + '=' + formName.value + '&' + age.name + '=' + age.value;
+			console.log(oData);
+			createNewAjax("POST",'./post.php',oData,function (data) {
+				alert(data);
+			})
+		};
+		function createLi(data) {
+			var temp = JSON.parse(data);
+			var oUl = document.getElementsByTagName('ul')[0];
+			temp.forEach(function (ele) {
+				str += '<li>' + 'Title' + ele.title + '---Date:' + ele.date + '</li>'
+			});
+			oUl.innerHTML = str;
+		}
+	</script>
+</body>
+</html>

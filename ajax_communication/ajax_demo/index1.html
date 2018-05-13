@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+	</style>
+</head>
+<body>
+	<form action="">
+		<input type="text"><br>
+		<input type="text"><br>
+		<input type="submit">
+	</form>
+	<button>刷新新闻</button>
+	<ul></ul>
+	<script>
+		var btn = document.getElementsByTagName('button')[0];
+		var str = '';
+		btn.onclick = function () {
+			function createNewsAjax(method,url,callback) {
+				var oRes;
+				var xhr = new XMLHttpRequest();
+				xhr.open(method,url,true);
+				xhr.send();
+				xhr.onreadystatechange = function (ev) {
+					if (xhr.readyState === 4){
+						if (xhr.status === 200){
+							oRes = JSON.parse(xhr.responseText);
+							callback(oRes);
+						}
+					}
+				}
+			}
+			createNewsAjax('GET','./getNews.php',createLi);
+		};
+		function createLi(data) {
+			var oUl = document.getElementsByTagName('ul')[0];
+			data.forEach(function (ele) {
+				str += '<li>' + 'Title' + ele.title + '---Date:' + ele.date + '</li>'
+			});
+			oUl.innerHTML = str;
+		}
+	</script>
+</body>
+</html>

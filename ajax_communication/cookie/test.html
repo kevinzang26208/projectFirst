@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+        var cookieFun = {
+            setCookie: function (name,value,time){
+                document.cookie = name + '=' + value + ';max-age=' + time;
+                return this;
+            },
+            removeCookie: function (name){
+                this.setCookie(name,'','-1')
+                return this;
+            },
+            getCookie: function (name,callback){
+                var cooKieArr = document.cookie.split('; ');
+                for(var i = 0,len = cooKieArr.length;i < len;i++){
+                    var tempArr = cooKieArr[i].split('=');
+                    if(tempArr[0] == name){
+                        if(callback){
+                            callback(tempArr[1]);
+                        } else {
+                            return tempArr[1];
+                        }
+                    }
+                }
+                callback(undefined);
+                return this;
+            }
+        }
+        document.cookie = 'kevin=handsome;max-age=50000';
+        document.cookie = 'kevin=cool;max-age=8000';
+        
+        cookieFun
+            .setCookie('age',24)
+            .setCookie('sex','male',10000)
+            .removeCookie('age')
+            .getCookie('sex');
+
+
+        /* 
+        2018-05-10T12:46:14.431Z 
+        2018-05-10T12:46:44.196Z 
+        2018-05-10T12:15:31.047Z 
+        */
+
+    </script>
+</body>
+</html>
