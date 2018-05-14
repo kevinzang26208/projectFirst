@@ -15,7 +15,9 @@
 	<script>
 		var btnNews = document.getElementsByTagName('button')[0];
 		var btnSubmit = document.getElementsByClassName('submit')[0];
-		var str = '';
+		var str = '';/*str在全局作用域下避免每次都需要声明该变量，并且每次声明时置空*/
+
+		/*Ajax封装函数，并兼容IE，采用回调函数的形式返回数据，参数data为传入的data*/
 		function createNewAjax(method,url,data,callback) {
 			var xhr;
 			if (XMLHttpRequest){
@@ -34,12 +36,14 @@
 			xhr.onreadystatechange = function (ev) {
 				if (xhr.readyState === 4){
 					if (xhr.status === 200){
-						// oRes = JSON.parse(xhr.responseText);
+						// oRes = JSON.parse(xhr.responseText);/*还没有转换为json对象的形式*/
 						callback(xhr.responseText);
 					}
 				}
 			}
 		}
+
+		/*为两个事件绑定函数*/
 		btnNews.onclick = function () {
 			createNewAjax('GET','./getNews.php','',createLi);
 		};
@@ -52,6 +56,8 @@
 				alert(data);
 			})
 		};
+
+		/*li创建函数*/
 		function createLi(data) {
 			var temp = JSON.parse(data);
 			var oUl = document.getElementsByTagName('ul')[0];
