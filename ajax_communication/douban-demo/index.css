@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+.head .db-nav-global{
+    background: #545652;
+    height: 28px;
+    font-size: 13px;
+}
+.head .db-nav-global ul{
+    float: left;
+    line-height: 28px;
+}
+.head .db-nav-global ul li{
+    text-align: center;
+    display: inline-block;
+    width: 50px;
+}
+.db-nav-global li a{
+    color: #D5D5D5;
+}
+.db-nav-global .nav-opr{
+    float: right;
+}
+.nav-opr span{
+    margin: 17px;
+    line-height: 28px;
+}
+.nav-opr span:last-child{
+    margin-right: 32px;
+}
+.db-nav-global .nav-opr a{
+    color: #D5D5D5;
+}
+
+/*头部中间的search部分*/
+.head .db-nav-music{
+    background: #F0F3EF;
+    height: 115px;
+}
+.db-nav-music .search-box{
+    height: 74px;
+    border-bottom: 1px solid #e5ebe4;
+}
+.db-nav-music .subdivide{
+    height: 40px;
+}
+.db-nav-music .search-primary{
+    width: 1040px;
+    height: 59px;
+    padding: 10px 0 5px 0;
+    margin: 0 auto;
+    font-size: 0;
+}
+.search-primary .db-log-music{
+    display: inline-block;
+    width: 130px;
+    height: 59px;
+    margin-right: 50px;
+    background-image: url("./lg_music.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+.search-primary .search-input{
+    display: inline-block;
+    height: 34px;
+    width: 860px;
+    margin: 15px 0 10px 0;
+    vertical-align: top;
+}
+.search-input input:first-child{
+    height: 32px;
+    width: 400px;
+    padding-left: 10px;
+    vertical-align: top;
+    border-width: 0;
+    border-radius: 4px;
+}
+.search-input input:last-child{
+    height: 32px;
+    width: 38px;
+    border-radius: 4px;
+    border-width: 0;
+    background-image: url("http://img3.doubanio.com/dae/accounts/resources/19507ad/music/assets/nav_mu_bg.png?s=1");
+    background-position: 0 -40px;
+}
+
+/*input下边的盒子部分*/
+.search-primary .display-box{
+    height: 455px;
+    width: 410px;
+    display: none;
+    border: 1px solid #cccccc;
+    background: #FFFFFF;
+}
+.display-box li{
+    height: 54px;
+    border-bottom: 1px solid #cccccc;
+    padding: 5px;
+}
+.display-box li:last-child{
+    border: none;
+
+}
+.display-box div{
+    display: inline-block;
+    overflow: hidden;
+}
+
+.display-box div:first-child{
+    height: 54px;
+    width: 54px;
+}
+.display-box div:first-child img{
+    width: 100%;
+}
+.display-box div:last-child{
+    padding-left: 15px;
+    height: 100%;
+    vertical-align: top;
+    font-size: 14px;
+    color: #6C6C6C;
+}
+.display-box div:last-child span{
+    display: inline-block;
+    height: 50%;
+    vertical-align: top;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
