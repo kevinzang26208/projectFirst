@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.wrapper{
+			width: 400px;
+			border: 1px solid #000000;
+			margin: 10px auto;
+		}
+		.btn{
+			display: flex;
+		}
+		button{
+
+			flex-grow: 1;
+			height: 50px;
+			font-size: 22px;
+			border-width: 1px;
+		}
+		.content{
+			height: 350px;
+			line-height: 350px;
+			text-align: center;
+			font-size: 60px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="btn">
+			<button style="background-color: #75b86b" data-index="one">one</button>
+			<button style="background-color: #f01414" data-index="two">two</button>
+			<button style="background-color: #2aabd2" data-index="three">three</button>
+		</div>
+		<div class="content">123</div>
+	</div>
+	<script src="./src/ajax.js"></script>
+	<script>
+		var content = document.getElementsByClassName('content')[0];
+		var btnBox = document.getElementsByClassName('btn')[0];
+		var btn = document.getElementsByTagName('button');
+		var arrBtn = Array.prototype.slice.call(btn);
+		btnBox.addEventListener('click',function (e) {
+			var event = e || window.event;
+			var target = event.target || event.srcElement;
+			var index = arrBtn.indexOf(target);
+			createNewAjax('GET','./src/getData.php','page=' + (index + 1),doData);
+			history.pushState({data:index},null,'?' + (index+1));
+		});
+		window.addEventListener('popstate',function (ev) {
+			createNewAjax('GET','./src/getData.php','page=' + (ev.state.data + 1),doData);
+		});
+		function init() {
+			history.replaceState({data:0},null,'?1');
+			createNewAjax('GET','./src/getData.php','page=1',doData);
+		}
+		function doData(data) {
+			content.innerHTML = data;
+		}
+		init();
+	</script>
+</body>
+</html>
